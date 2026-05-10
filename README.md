@@ -16,7 +16,18 @@ Hands-on workshop materials for **WordCamp Porto 2026**. Six self-contained Word
 
 ## Exercises
 
-> Filled in once all exercises are scaffolded — see Task 9 of the build plan.
+Work through these in order. Each is a standalone, installable WordPress plugin in its own folder.
+
+| # | Folder | Concept |
+| --- | --- | --- |
+| 01 | [`exercises/01-hello-ability`](./exercises/01-hello-ability) | Register your first category and ability |
+| 02 | [`exercises/02-input-schema`](./exercises/02-input-schema) | Gate 1: validate input with JSON Schema |
+| 03 | [`exercises/03-permission-gate`](./exercises/03-permission-gate) | Gate 2: declarative `permission_callback` |
+| 04 | [`exercises/04-output-schema`](./exercises/04-output-schema) | Gate 3: enforce the response contract |
+| 05 | [`exercises/05-real-data-ability`](./exercises/05-real-data-ability) | List and publish real WordPress posts |
+| 06 | [`exercises/06-rest-and-ai-tool`](./exercises/06-rest-and-ai-tool) | Consume abilities via the built-in REST API + Node AI-agent demo |
+
+Each exercise has a `README.md` with the goal, the task, verification commands, and a `solution/` subfolder if you get stuck.
 
 ## API reference
 
