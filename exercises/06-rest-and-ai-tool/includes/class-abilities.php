@@ -7,7 +7,7 @@ class WCPorto_06_Abilities {
 
 	public static function register(): void {
 		// TODO: Register ability 'wcporto/echo-with-metadata' with:
-		//   - category:            'wcporto/agent-tools'
+		//   - category:            'wcporto-agent-tools'
 		//   - permission_callback: requires the user to be logged in
 		//   - input_schema:        { message: string (minLength 1, maxLength 200), required }
 		//   - output_schema:       { echoed: string, length: integer, received_at: string, all required }

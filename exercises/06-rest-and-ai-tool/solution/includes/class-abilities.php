@@ -9,7 +9,7 @@ class WCPorto_06_Abilities {
 		wp_register_ability( 'wcporto/echo-with-metadata', [
 			'label'               => __( 'Echo With Metadata', 'wcporto-06-rest-and-ai-tool' ),
 			'description'         => __( 'Returns the input message along with its character length and a server timestamp. Useful as a smoke test for AI agents and MCP clients.', 'wcporto-06-rest-and-ai-tool' ),
-			'category'            => 'wcporto/agent-tools',
+			'category'            => 'wcporto-agent-tools',
 			'permission_callback' => static function ( array $input ): bool {
 				return is_user_logged_in();
 			},
@@ -44,6 +44,9 @@ class WCPorto_06_Abilities {
 					'received_at' => gmdate( 'c' ),
 				];
 			},
+			'meta'                => [
+				'show_in_rest' => true,
+			],
 		] );
 	}
 }

@@ -13,11 +13,11 @@ Register your first **Abilities API category** and your first **ability**, retur
 
 ## The task
 
-1. Open `includes/class-categories.php`. Inside `register()`, call `wp_register_ability_category()` to register a category with slug **`wcporto/workshop-actions`**, label **`Workshop Actions`**, and a one-sentence description.
+1. Open `includes/class-categories.php`. Inside `register()`, call `wp_register_ability_category()` to register a category with slug **`wcporto-workshop-actions`**, label **`Workshop Actions`**, and a one-sentence description.
 2. Open `includes/class-abilities.php`. Inside `register()`, call `wp_register_ability()` to register an ability with:
    - slug: **`wcporto/say-hello`**
    - label: **`Say Hello`**
-   - category: **`wcporto/workshop-actions`**
+   - category: **`wcporto-workshop-actions`**
    - `permission_callback`: `'__return_true'`
    - `execute_callback`: returns `[ 'message' => 'Hello, WordCamp Porto 2026!' ]`
 3. Activate the plugin in `wp-admin → Plugins`.
@@ -28,7 +28,7 @@ Run the snippet below against your local WP. It should print the greeting and ex
 
 ```bash
 wp eval '
-$result = wp_get_ability( "wcporto/say-hello" )->execute( [] );
+$result = wp_get_ability( "wcporto/say-hello" )->execute();
 print_r( $result );
 '
 ```

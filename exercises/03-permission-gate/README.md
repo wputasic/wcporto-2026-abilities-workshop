@@ -22,7 +22,7 @@ Tighten **Gate 2** — replace the lenient `'__return_true'` with a real `permis
 
 ```bash
 wp eval '
-$result = wp_get_ability( "wcporto/admin-only-greeting" )->execute( [] );
+$result = wp_get_ability( "wcporto/admin-only-greeting" )->execute();
 print_r( $result );
 ' --user=1
 ```
@@ -36,7 +36,7 @@ Expected: `[message] => Welcome, administrator!` plus `[user_id]`.
 wp user create wsub wsub@example.com --role=subscriber --user_pass=test1234
 
 wp eval '
-$result = wp_get_ability( "wcporto/admin-only-greeting" )->execute( [] );
+$result = wp_get_ability( "wcporto/admin-only-greeting" )->execute();
 echo is_wp_error( $result ) ? $result->get_error_message() : "ENGINE RAN!";
 echo PHP_EOL;
 ' --user=wsub

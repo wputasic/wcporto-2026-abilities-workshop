@@ -1,0 +1,129 @@
+============================================================
+SPEAKER CUE CARD - ONE PAGE
+WordCamp Porto 2026 - Abilities API Workshop
+============================================================
+
+Glance-only. Bullets are triggers, not scripts.
+
+
+------------------------------------------------------------
+OPEN (5 min)
+------------------------------------------------------------
+
+- Six plugins. Zero register_rest_route. AI-ready WordPress.
+- Four gates: Input -> Permission -> Engine -> Output.
+- Confirm: WP 6.9+, PHP 8.1+, WP-CLI. Point at solution/ folders.
+
+
+------------------------------------------------------------
+EX 1 - HELLO ABILITY (15 min)
+------------------------------------------------------------
+
+- Two hooks, ordered: categories THEN abilities.
+- ABILITY slug = vendor/name (exactly one slash). CATEGORY slug = vendor-name (NO slash). Both lowercase + dashes.
+- permission_callback required -> '__return_true' for now.
+- No input_schema -> call ->execute() with NO arg. Passing [] errors as ability_missing_input_schema.
+- No-schema callbacks: typed array $input needs a default -> function (array $input = []): ... . Core invokes with zero args.
+- DEMO: run wp eval. Break with underscore -> show _doing_it_wrong. Fix.
+- BRIDGE: "anyone, any input -> fix input first."
+
+
+------------------------------------------------------------
+EX 2 - INPUT SCHEMA (15 min)
+------------------------------------------------------------
+
+- JSON Schema = same vocab as REST args, OpenAPI, AI tool defs.
+- "required" is its own array. Easy to forget.
+- Gate 1 fail -> engine NEVER runs -> WP_Error.
+- DEMO: success + empty-input fail. Add error_log in engine, tail log, prove silence.
+- BRIDGE: "input clean, auth next."
+
+
+------------------------------------------------------------
+EX 3 - PERMISSION GATE (15 min)
+------------------------------------------------------------
+
+- ONE callback gates REST + AJAX + CLI + cron simultaneously.
+- Signature: function($input): bool|WP_Error. Never null.
+- Runs AFTER input validation - $input is trusted.
+- DEMO: admin success -> subscriber fail. Anti-pattern: move check into engine -> "how would an agent know in advance?" -> revert.
+- BRIDGE: "output is still the wild west."
+
+
+------------------------------------------------------------
+EX 4 - OUTPUT SCHEMA (15 min)
+------------------------------------------------------------
+
+- Protects CONSUMERS from your future regressions.
+- AI agents are unforgiving - contract is load-bearing.
+- Use additionalProperties: false on outputs.
+- Gate 3 fires only on successful return, not on WP_Error.
+- DEMO: broken engine (wrong_key) -> WP_Error. Fix -> success. Re-break (type mismatch) -> caught.
+- BRIDGE: "hello-world's done - wire to real data."
+
+
+------------------------------------------------------------
+EX 5 - REAL DATA ABILITY (20 min)
+------------------------------------------------------------
+
+- Two abilities: read (lenient) + write (publish_posts).
+- NEVER return WP_Post. Map to { id, title, link }.
+- publish_posts is NOT edit_posts. Contributors can edit, not publish.
+- get_permalink() AFTER status flip.
+- DEMO: list posts. Create draft -> publish via ability -> wp post get confirms.
+- BRIDGE: "now the magic moment - REST for free."
+
+
+------------------------------------------------------------
+EX 6 - REST & AI TOOL (20 min)  *** CLIMAX ***
+------------------------------------------------------------
+
+- Three endpoints: GET /abilities, GET /abilities/{name}, POST .../run.
+- Auth-only. Application Passwords = simplest external auth.
+- Slash in slug is LITERAL - do NOT encode as %2F.
+- POST body wraps params: {"input": {...}} not {...}.
+- show_in_rest defaults to FALSE - opt in with 'meta' => ['show_in_rest' => true].
+- GET /abilities returns full schemas -> this is the AI tool catalog.
+- DEMO: Application Password -> cURL /abilities -> scroll JSON live -> point at schemas. Run node tools/discover.mjs.
+- PUNCHLINE: swap script for MCP server / LangChain wrapper - ability unchanged.
+
+
+------------------------------------------------------------
+CLOSE (5 min)
+------------------------------------------------------------
+
+- Recite the four gates one more time.
+- "Zero register_rest_route calls. You got REST + discovery + auth + validation for free."
+- CTA: re-implement one feature in a plugin you maintain as an ability.
+- Repo URL on final slide. Q&A.
+
+
+============================================================
+EMERGENCY KIT
+============================================================
+
+- BEHIND SCHEDULE? Cut anti-pattern demos in 3 & 4. NEVER cut the EX 6 discovery moment.
+- DEMO BROKEN >60s? Drop solution/ in, activate, move on.
+
+COMMON QUESTIONS:
+- MCP wrappers exist - watch the core repo.
+- Cache inside engine, not around the ability.
+- Blocks call abilities via REST like any other client.
+- Multisite = per-site registry.
+- Row-level perms: permission_callback receives $input.
+
+
+============================================================
+SLUGS YOU WILL TYPE LIVE
+============================================================
+
+wcporto-workshop-actions          (category, ex 1)
+wcporto/say-hello                 (ex 1)
+wcporto/say-hello-to              (ex 2)
+wcporto/admin-only-greeting       (ex 3)
+wcporto/structured-greeting       (ex 4)
+wcporto-content                   (category, ex 5)
+wcporto/list-recent-posts         (ex 5)
+wcporto/publish-draft             (ex 5)
+wcporto-agent-tools               (category, ex 6)
+wcporto/echo-with-metadata        (ex 6)

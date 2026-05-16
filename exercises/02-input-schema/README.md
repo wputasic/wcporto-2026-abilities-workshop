@@ -32,7 +32,7 @@ Expected: `[message] => Hello, Porto!`
 
 ```bash
 wp eval '
-$result = wp_get_ability( "wcporto/say-hello-to" )->execute( [] );
+$result = wp_get_ability( "wcporto/say-hello-to" )->execute();
 echo is_wp_error( $result ) ? $result->get_error_message() : "ENGINE RAN!";
 echo PHP_EOL;
 '

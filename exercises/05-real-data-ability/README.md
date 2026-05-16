@@ -12,7 +12,7 @@ Build two abilities that read and write real WordPress data, using **all four ga
 
 ## The task
 
-1. Register category `wcporto/content`.
+1. Register category `wcporto-content`.
 2. Register ability `wcporto/list-recent-posts` — input: optional `count` (1–20, default 5); output: `{ posts: [{ id, title, link }] }`.
 3. Register ability `wcporto/publish-draft` — input: required `post_id` (integer); permission: `publish_posts`; output: `{ post_id, status, link }`.
 

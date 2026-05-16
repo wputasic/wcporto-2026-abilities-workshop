@@ -52,14 +52,16 @@ const target =
 	abilities[0];
 
 const targetSlug = target.name ?? target.slug;
-const runUrl = `${baseUrl}/wp-json/wp-abilities/v1/abilities/${encodeURIComponent(targetSlug)}/run`;
+// The route accepts the slash literally — do NOT URL-encode it as %2F.
+const runUrl = `${baseUrl}/wp-json/wp-abilities/v1/abilities/${targetSlug}/run`;
 
 console.log(`\n[2/2] Invoking ${targetSlug} at ${runUrl}\n`);
 
 const execRes = await fetch(runUrl, {
 	method: 'POST',
 	headers,
-	body: JSON.stringify({ message: 'Hello from the Node discovery script!' }),
+	// Run endpoint wraps params under an `input` key.
+	body: JSON.stringify({ input: { message: 'Hello from the Node discovery script!' } }),
 });
 
 const result = await execRes.json();

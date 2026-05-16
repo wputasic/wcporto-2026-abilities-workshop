@@ -14,7 +14,7 @@ class WCPorto_05_Abilities {
 		wp_register_ability( 'wcporto/list-recent-posts', [
 			'label'               => __( 'List Recent Posts', 'wcporto-05-real-data-ability' ),
 			'description'         => __( 'Returns the most recent published posts.', 'wcporto-05-real-data-ability' ),
-			'category'            => 'wcporto/content',
+			'category'            => 'wcporto-content',
 			'permission_callback' => static function ( array $input ): bool {
 				return is_user_logged_in();
 			},
@@ -63,6 +63,9 @@ class WCPorto_05_Abilities {
 					),
 				];
 			},
+			'meta'                => [
+				'show_in_rest' => true,
+			],
 		] );
 	}
 
@@ -70,7 +73,7 @@ class WCPorto_05_Abilities {
 		wp_register_ability( 'wcporto/publish-draft', [
 			'label'               => __( 'Publish Draft', 'wcporto-05-real-data-ability' ),
 			'description'         => __( 'Publishes a draft post by ID.', 'wcporto-05-real-data-ability' ),
-			'category'            => 'wcporto/content',
+			'category'            => 'wcporto-content',
 			'permission_callback' => static function ( array $input ): bool {
 				return current_user_can( 'publish_posts' );
 			},
@@ -122,6 +125,9 @@ class WCPorto_05_Abilities {
 					'link'    => (string) get_permalink( $post_id ),
 				];
 			},
+			'meta'                => [
+				'show_in_rest' => true,
+			],
 		] );
 	}
 }

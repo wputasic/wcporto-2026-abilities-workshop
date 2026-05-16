@@ -20,7 +20,7 @@
 
 ### `wp_register_ability_category( string $slug, array $args ): void`
 
-- `$slug` — namespaced lowercase slug (e.g., `wcporto/workshop-actions`).
+- `$slug` — namespaced lowercase slug (e.g., `wcporto-workshop-actions`).
 - `$args`:
   - `label` (string, required) — human-readable name.
   - `description` (string, required) — one-sentence description.
@@ -79,8 +79,9 @@ Abilities are **automatically** exposed over REST under namespace `wp-abilities/
 | `GET` `POST` `DELETE` | `/wp-json/wp-abilities/v1/abilities/{name}/run` | Execute an ability |
 
 - **Authentication**: all endpoints require an authenticated user.
-- The `{name}` path segment uses the namespaced slug (URL-encode the `/`, e.g., `my-plugin%2Fmy-ability`).
-- An ability can opt out of REST exposure by passing `'meta' => [ 'show_in_rest' => false ]` to `wp_register_ability()`.
+- The `{name}` path segment is the namespaced slug passed **literally**, including the `/` (e.g., `.../abilities/my-plugin/my-ability/run`). Do not URL-encode the slash.
+- **REST exposure is opt-in.** `show_in_rest` defaults to `false`. To expose an ability, pass `'meta' => [ 'show_in_rest' => true ]` to `wp_register_ability()`. Abilities without it are invisible to the list endpoint and rejected by `/run`.
+- **POST / GET param shape**: parameters are wrapped under an `input` key. For POST: `{"input": {...}}`. For GET: `?input[message]=...` (or send a JSON-encoded `input` query param).
 
 ## Schema dialect
 

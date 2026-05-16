@@ -9,7 +9,7 @@ class WCPorto_04_Abilities {
 		wp_register_ability( 'wcporto/structured-greeting', [
 			'label'               => __( 'Structured Greeting', 'wcporto-04-output-schema' ),
 			'description'         => __( 'Returns a greeting and its character length.', 'wcporto-04-output-schema' ),
-			'category'            => 'wcporto/workshop-actions',
+			'category'            => 'wcporto-workshop-actions',
 			'permission_callback' => '__return_true',
 			'input_schema'        => [
 				'type'                 => 'object',
@@ -36,6 +36,9 @@ class WCPorto_04_Abilities {
 					'length'   => mb_strlen( $greeting ),
 				];
 			},
+			'meta'                => [
+				'show_in_rest' => true,
+			],
 		] );
 	}
 }
