@@ -17,3 +17,13 @@ vendor/
 # WP local dev artifacts
 .wp-env-home/
 .wp-env/
+
+# Personal speaker materials (kept on disk, not published)
+SPEAKER_NOTES.md
+SLIDE_NOTES.md
+SLIDE_NOTES.txt
+SPEAKER_CUE_CARD.md
+SPEAKER_CUE_CARD.txt
+LOCAL_SETUP.md
+REHEARSAL_COMMANDS.md
+CHANGES.md
